@@ -2,6 +2,11 @@
 
 > **Open any market with an AI copilot. A Solana vault backstops thin order books so trades clear instantly — no cold-start problem.**
 
+[![CI](https://github.com/Oceanjackson1/Solana-Prediction-Market/actions/workflows/ci.yml/badge.svg)](https://github.com/Oceanjackson1/Solana-Prediction-Market/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
+[![Solana](https://img.shields.io/badge/Solana-devnet-14F195?logo=solana&logoColor=white)](https://explorer.solana.com/?cluster=devnet)
+[![Anchor](https://img.shields.io/badge/Anchor-0.31.1-512bd4)](https://www.anchor-lang.com/)
+
 Colosseum **Frontier** hackathon submission. [Pitch](./docs/pitch-deck.md) · [Demo script](./docs/demo-script.md) · [Whitepaper (lite)](./docs/whitepaper-lite.md) · [Architecture](./docs/architecture.md)
 
 ---
