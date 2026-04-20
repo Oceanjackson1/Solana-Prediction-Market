@@ -1,0 +1,26 @@
+[toolchain]
+package_manager = "pnpm"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+market = "3dphwMrHCNYzeAmeY8r6NNfdDCDrqYQQAuoDpHBZntGM"
+vault  = "7qmi9b1z7DvDMRDhFf6nzahtCkuA5xRaesv3QphT4gQJ"
+oracle = "5tc1pjwjiAwPRpSNQbiP9nrrofXnLKzBfcC2SbqurM6n"
+
+[programs.devnet]
+market = "3dphwMrHCNYzeAmeY8r6NNfdDCDrqYQQAuoDpHBZntGM"
+vault  = "7qmi9b1z7DvDMRDhFf6nzahtCkuA5xRaesv3QphT4gQJ"
+oracle = "5tc1pjwjiAwPRpSNQbiP9nrrofXnLKzBfcC2SbqurM6n"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "pnpm exec ts-mocha -p ./tsconfig.anchor.json -t 1000000 tests/**/*.ts"

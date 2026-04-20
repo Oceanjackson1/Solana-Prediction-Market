@@ -1,0 +1,36 @@
+# Anchor / Rust
+target/
+**/*.rs.bk
+.anchor/
+test-ledger/
+
+# Node
+node_modules/
+
+# Solana keypairs — never commit secrets
+*-keypair.json
+!target/deploy/*.json.keep
+
+# Next.js
+app/.next/
+app/out/
+app/.vercel/
+app/*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.local
+app/.env
+app/.env.local
+
+# Local demo caches (mint pubkey, market pubkey — regeneratable)
+.arena-demo/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+
+# pnpm / logs
+.pnpm-store/
+*.log
