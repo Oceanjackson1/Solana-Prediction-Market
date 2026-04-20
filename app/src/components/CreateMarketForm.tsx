@@ -19,6 +19,7 @@ import {
 } from "@/lib/anchor/pdas";
 import { USDC_MINT_DEVNET } from "@/lib/constants";
 import { CopilotPanel } from "./CopilotPanel";
+import { useToast } from "./Toast";
 import type { MarketSpec } from "@/lib/ai/schema";
 
 function slugify(s: string): string {
@@ -33,6 +34,7 @@ export function CreateMarketForm() {
   const router = useRouter();
   const program = useMarketProgram();
   const { publicKey } = useWallet();
+  const toast = useToast();
 
   const [question, setQuestion] = useState("");
   const [resolutionCriteria, setResolutionCriteria] = useState("");
@@ -99,9 +101,12 @@ export function CreateMarketForm() {
         })
         .rpc();
 
+      toast.success("Market created — opening…");
       router.push(`/markets/${market.toBase58()}`);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      const msg = e instanceof Error ? e.message : String(e);
+      setErr(msg);
+      toast.error(msg);
     } finally {
       setBusy(false);
     }

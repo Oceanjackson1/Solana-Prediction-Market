@@ -34,6 +34,7 @@ import {
   impliedYesPrice,
   type PoolSnapshot,
 } from "@/lib/anchor/vault-sdk";
+import { useToast } from "./Toast";
 
 const UNIT = 1_000_000;
 
@@ -42,13 +43,14 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
   const { publicKey } = useWallet();
   const program = useMarketProgram();
   const vault = useVaultProgram();
+  const toast = useToast();
   const marketPubkey = new PublicKey(marketId);
 
   const [market, setMarket] = useState<MarketAccount["account"] | null>(null);
   const [poolPk, setPoolPk] = useState<PublicKey | null>(null);
   const [snap, setSnap] = useState<PoolSnapshot | null>(null);
   const [userLp, setUserLp] = useState<bigint>(0n);
-  const [err, setErr] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [nonce, setNonce] = useState(0);
 
@@ -83,7 +85,7 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
         setSnap(null);
       }
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      setLoadError(e instanceof Error ? e.message : String(e));
     }
   }, [connection, marketPubkey, publicKey]);
 
@@ -94,7 +96,6 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
   async function doInitializeAndSeed() {
     if (!vault || !program || !publicKey || !market) return;
     setBusy(true);
-    setErr(null);
     try {
       const usdcAmount = Math.round(parseFloat(bootstrapUsdc) * UNIT);
       if (usdcAmount <= 0) throw new Error("amount > 0");
@@ -183,9 +184,12 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
         })
         .rpc();
 
+      toast.success(
+        `Vault seeded with ${(usdcAmount / UNIT).toFixed(0)} YES + ${(usdcAmount / UNIT).toFixed(0)} NO · implied price 0.500`,
+      );
       setNonce((n) => n + 1);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      toast.error(e instanceof Error ? e.message : String(e));
     } finally {
       setBusy(false);
     }
@@ -194,7 +198,6 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
   async function doWithdraw() {
     if (!vault || !publicKey || !snap || !poolPk) return;
     setBusy(true);
-    setErr(null);
     try {
       const amt = Math.round(parseFloat(withdrawVlp) * UNIT);
       if (amt <= 0) throw new Error("amount > 0");
@@ -236,9 +239,12 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
         })
         .rpc();
 
+      toast.success(
+        `Burned ${(amt / UNIT).toFixed(2)} vLP · pro-rata reserves returned`,
+      );
       setNonce((n) => n + 1);
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      toast.error(e instanceof Error ? e.message : String(e));
     } finally {
       setBusy(false);
     }
@@ -281,8 +287,8 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
                   : "Connect wallet"}
             </button>
           </div>
-          {err && (
-            <p className="mt-3 text-xs text-rose-600 break-all">{err}</p>
+          {loadError && (
+            <p className="mt-3 text-xs text-rose-600 break-all">{loadError}</p>
           )}
         </div>
       ) : (
@@ -325,9 +331,6 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
             <p className="mt-2 text-xs text-zinc-500">
               Burning vLP returns a pro-rata slice of (USDC, YES, NO).
             </p>
-            {err && (
-              <p className="mt-3 text-xs text-rose-600 break-all">{err}</p>
-            )}
           </div>
         </>
       )}
