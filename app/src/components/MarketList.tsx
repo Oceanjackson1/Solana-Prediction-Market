@@ -25,7 +25,7 @@ export function MarketList() {
 
   if (error) {
     return (
-      <div className="rounded-2xl border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/30 p-4 text-sm text-rose-700 dark:text-rose-300">
+      <div className="rounded-[6px] border border-[color:var(--ps-warning)]/30 bg-[color:var(--ps-warning)]/5 p-4 text-sm text-[color:var(--ps-warning)]">
         Couldn&apos;t load markets — {error}
       </div>
     );
@@ -43,18 +43,15 @@ export function MarketList() {
 
   if (markets.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 p-10 text-center">
-        <p className="text-base text-zinc-600 dark:text-zinc-300">
+      <div className="rounded-[12px] border border-dashed border-[color:var(--ps-mute)] bg-white p-10 text-center">
+        <p className="text-xl font-light text-[color:var(--ps-charcoal)] leading-[1.25]">
           No markets open yet.
         </p>
-        <p className="mt-1 text-sm text-zinc-500">
+        <p className="mt-2 text-sm text-[color:var(--ps-body-gray)]">
           Be the first — open a market and the vault will backstop it.
         </p>
-        <Link
-          href="/create"
-          className="inline-block mt-4 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-black px-4 py-2 text-sm font-medium"
-        >
-          Open a market →
+        <Link href="/create" className="btn-ps-primary mt-6">
+          Open a market
         </Link>
       </div>
     );
@@ -71,16 +68,16 @@ export function MarketList() {
 
 function SkeletonCard() {
   return (
-    <div className="animate-pulse rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5">
+    <div className="animate-pulse rounded-[12px] border border-transparent bg-white p-5 shadow-ps-2">
       <div className="flex gap-2">
-        <div className="h-4 w-16 rounded bg-zinc-100 dark:bg-zinc-900" />
-        <div className="h-4 w-20 rounded bg-zinc-100 dark:bg-zinc-900" />
+        <div className="h-4 w-16 rounded-[3px] bg-zinc-100" />
+        <div className="h-4 w-20 rounded-[3px] bg-zinc-100" />
       </div>
-      <div className="mt-3 h-5 w-full rounded bg-zinc-100 dark:bg-zinc-900" />
-      <div className="mt-2 h-5 w-3/4 rounded bg-zinc-100 dark:bg-zinc-900" />
+      <div className="mt-3 h-5 w-full rounded-[3px] bg-zinc-100" />
+      <div className="mt-2 h-5 w-3/4 rounded-[3px] bg-zinc-100" />
       <div className="mt-6 flex justify-between">
-        <div className="h-3 w-24 rounded bg-zinc-100 dark:bg-zinc-900" />
-        <div className="h-3 w-20 rounded bg-zinc-100 dark:bg-zinc-900" />
+        <div className="h-3 w-24 rounded-[3px] bg-zinc-100" />
+        <div className="h-3 w-20 rounded-[3px] bg-zinc-100" />
       </div>
     </div>
   );

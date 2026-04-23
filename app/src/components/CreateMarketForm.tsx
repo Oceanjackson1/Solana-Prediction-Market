@@ -176,7 +176,7 @@ export function CreateMarketForm() {
       <button
         disabled={!publicKey || busy || question.trim().length < 6}
         onClick={submit}
-        className="w-full rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-black py-2 text-sm font-medium disabled:opacity-50"
+        className="btn-ps-primary w-full"
       >
         {busy
           ? "Creating…"

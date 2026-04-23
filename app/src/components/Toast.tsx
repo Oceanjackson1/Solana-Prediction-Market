@@ -76,13 +76,13 @@ function ToastDeck({ toasts }: { toasts: Toast[] }) {
         <div
           key={t.id}
           className={[
-            "pointer-events-auto rounded-xl border px-4 py-3 shadow-lg text-sm backdrop-blur",
+            "pointer-events-auto rounded-[6px] border px-4 py-3 shadow-ps-2 text-sm bg-white",
             t.kind === "success" &&
-              "border-emerald-300 bg-emerald-50/90 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-100",
+              "border-emerald-300 text-emerald-900",
             t.kind === "error" &&
-              "border-rose-300 bg-rose-50/90 text-rose-900 dark:border-rose-800 dark:bg-rose-950/80 dark:text-rose-100",
+              "border-[color:var(--ps-warning)]/40 text-[color:var(--ps-warning)]",
             t.kind === "info" &&
-              "border-zinc-300 bg-white/90 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-100",
+              "border-[color:var(--ps-divider)] text-[color:var(--ps-charcoal)]",
           ]
             .filter(Boolean)
             .join(" ")}

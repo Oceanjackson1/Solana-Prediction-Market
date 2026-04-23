@@ -1,26 +1,208 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* PS surfaces */
+  --ps-black: #000000;
+  --ps-shadow: #121314;
+  --ps-paper: #ffffff;
+  --ps-ice: #f5f7fa;
+  --ps-divider: #f3f3f3;
+
+  /* PS brand */
+  --ps-blue: #0070cc;
+  --ps-blue-press: #0068bd;
+  --ps-cyan: #1eaedb;
+  --ps-link-dark: #0068bd;
+  --ps-link-light: #53b1ff;
+
+  /* PS commerce */
+  --ps-orange: #d53b00;
+  --ps-orange-active: #aa2f00;
+
+  /* PS text on white */
+  --ps-display-ink: #000000;
+  --ps-charcoal: #1f1f1f;
+  --ps-body-gray: #6b6b6b;
+  --ps-mute: #cccccc;
+
+  /* Semantic */
+  --ps-warning: #c81b3a;
+
+  --background: var(--ps-paper);
+  --foreground: var(--ps-charcoal);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-ps-black: var(--ps-black);
+  --color-ps-shadow: var(--ps-shadow);
+  --color-ps-paper: var(--ps-paper);
+  --color-ps-ice: var(--ps-ice);
+  --color-ps-divider: var(--ps-divider);
+  --color-ps-blue: var(--ps-blue);
+  --color-ps-cyan: var(--ps-cyan);
+  --color-ps-orange: var(--ps-orange);
+  --color-ps-charcoal: var(--ps-charcoal);
+  --color-ps-body: var(--ps-body-gray);
+  --color-ps-mute: var(--ps-mute);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--ps-black);
+    --foreground: var(--ps-paper);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ========== PS surface atmospheres ========== */
+
+.surface-ps-dark {
+  background: linear-gradient(180deg, var(--ps-shadow), var(--ps-black));
+  color: var(--ps-paper);
+}
+
+.surface-ps-light {
+  background: linear-gradient(180deg, var(--ps-paper), var(--ps-ice));
+  color: var(--ps-charcoal);
+}
+
+.surface-ps-brand {
+  background: var(--ps-blue);
+  color: var(--ps-paper);
+}
+
+/* ========== PS button system ========== */
+
+.btn-ps-primary,
+.btn-ps-commerce,
+.btn-ps-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  border: 0 solid transparent;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.btn-ps-primary {
+  background: var(--ps-blue);
+  color: var(--ps-paper);
+}
+.btn-ps-primary:hover:not(:disabled) {
+  background: var(--ps-cyan);
+  border: 2px solid var(--ps-paper);
+  box-shadow: 0 0 0 2px var(--ps-blue);
+  transform: scale(1.08);
+}
+.btn-ps-primary:active:not(:disabled) {
+  opacity: 0.65;
+}
+.btn-ps-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ps-blue);
+}
+
+.btn-ps-commerce {
+  background: var(--ps-orange);
+  color: var(--ps-paper);
+  font-weight: 700;
+  letter-spacing: 0.45px;
+}
+.btn-ps-commerce:hover:not(:disabled) {
+  background: var(--ps-cyan);
+  border: 2px solid var(--ps-paper);
+  box-shadow: 0 0 0 2px var(--ps-blue);
+  transform: scale(1.08);
+}
+.btn-ps-commerce:active:not(:disabled) {
+  background: var(--ps-orange-active);
+}
+
+.btn-ps-ghost {
+  background: transparent;
+  color: var(--ps-charcoal);
+  border: 1px solid var(--ps-divider);
+  padding: 8px 18px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-ps-ghost:hover:not(:disabled) {
+  background: var(--ps-cyan);
+  color: var(--ps-paper);
+  border: 2px solid var(--ps-paper);
+  box-shadow: 0 0 0 2px var(--ps-blue);
+  transform: scale(1.06);
+}
+
+.btn-ps-primary:disabled,
+.btn-ps-commerce:disabled,
+.btn-ps-ghost:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  border: 0 solid transparent !important;
+}
+
+/* ========== PS shadow tiers ========== */
+.shadow-ps-1 { box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.06); }
+.shadow-ps-2 { box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.08); }
+.shadow-ps-3 { box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.16); }
+.shadow-ps-hero { box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.80); }
+
+/* ========== PS input ========== */
+.input-ps {
+  background: var(--ps-paper);
+  border: 1px solid var(--ps-mute);
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-size: 16px;
+  color: var(--ps-charcoal);
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+.input-ps::placeholder { color: rgba(0, 0, 0, 0.6); }
+.input-ps:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ps-blue);
+}
+
+/* ========== Wallet adapter modal polish ========== */
+.wallet-adapter-button {
+  border-radius: 999px !important;
+  font-size: 14.4px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.144px !important;
+  background: var(--ps-blue) !important;
+  transition: transform 180ms ease, background-color 180ms ease,
+    box-shadow 180ms ease !important;
+}
+.wallet-adapter-button:hover {
+  background: var(--ps-cyan) !important;
+  box-shadow: 0 0 0 2px var(--ps-blue) !important;
+  transform: scale(1.04) !important;
 }

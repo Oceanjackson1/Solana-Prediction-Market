@@ -145,7 +145,7 @@ export function RedeemWinning({
       <button
         disabled={busy}
         onClick={submit}
-        className="mt-3 w-full rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white py-2 text-sm font-medium disabled:opacity-50"
+        className="btn-ps-commerce mt-3 w-full !text-sm !py-2"
       >
         {busy ? "Redeeming…" : `Redeem ${winningSide.toUpperCase()} → USDC`}
       </button>

@@ -278,7 +278,7 @@ export function VaultDashboard({ marketId }: { marketId: string }) {
             <button
               disabled={!publicKey || busy}
               onClick={doInitializeAndSeed}
-              className="rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-black px-4 py-2 text-sm font-medium disabled:opacity-50"
+              className="btn-ps-primary !text-sm !py-2 !px-5"
             >
               {busy
                 ? "Bootstrapping…"
