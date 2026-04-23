@@ -1,8 +1,7 @@
-import { UsdcBalance } from "@/components/UsdcBalance";
 import { MarketList } from "@/components/MarketList";
-import { StatsStrip } from "@/components/StatsStrip";
 import { FeaturedMarketCard } from "@/components/FeaturedMarketCard";
 import { CategoryPills } from "@/components/CategoryPills";
+import { HeroNebula } from "@/components/HeroNebula";
 import Link from "next/link";
 import {
   Target,
@@ -22,93 +21,162 @@ import {
 export default function Home() {
   return (
     <main className="flex flex-1 w-full flex-col">
-      {/* Masthead — PS dark hero with ambient glow */}
-      <section className="relative overflow-hidden surface-ps-dark">
-        {/* ambient radial glow */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-[color:var(--ps-blue)] opacity-30 blur-[120px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-[color:var(--ps-cyan)] opacity-15 blur-[120px]"
-        />
+      {/* ============ HERO ============ */}
+      <section className="relative overflow-hidden surface-ps-dark min-h-[88vh] flex flex-col">
+        {/* Corner crop marks — editorial "print proof" feel */}
+        <span className="crop-mark crop-tl" aria-hidden />
+        <span className="crop-mark crop-tr" aria-hidden />
+        <span className="crop-mark crop-bl" aria-hidden />
+        <span className="crop-mark crop-br" aria-hidden />
 
-        <div className="relative mx-auto w-full max-w-5xl px-6 pt-20 pb-16 sm:pt-28">
-          <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            {/* Left column */}
+        {/* Top-left wordmark caption (masthead attribution) */}
+        <div className="absolute top-8 left-20 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/40">
+          A R E N A <span className="mx-3 text-white/25">/</span> v 0.1
+        </div>
+
+        {/* Main grid */}
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 items-center px-12 pt-28 pb-32">
+          <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center">
+            {/* Left column — editorial copy */}
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-3 py-1 text-xs font-medium text-white/80">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-3 py-1 text-[11px] font-medium tracking-wide text-white/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-cyan)] animate-pulse" />
-                Live on Solana · Free test USDC
+                Live on Solana devnet · Free test USDC
               </span>
-              <h1 className="mt-6 max-w-3xl text-5xl font-light leading-[1.1] tracking-[-0.1px] text-white sm:text-[54px]">
+              <h1 className="mt-7 text-[56px] font-semibold leading-[1.04] tracking-[-0.02em] text-white sm:text-[68px]">
                 Bet on anything.
                 <br />
                 <span className="text-[color:var(--ps-cyan)]">Settled on Solana.</span>
               </h1>
-              <p className="mt-5 max-w-xl text-lg font-light leading-[1.5] text-white/70">
-                From World Cup finals to AI milestones — trade any prediction
-                with one click. Your bet settles automatically when the event
-                resolves.
+              <p className="mt-6 max-w-[48ch] text-[17px] font-light leading-[1.55] text-white/70">
+                A prediction market for the long tail of events — from World
+                Cup finals to AI milestones. One click, one second, one Solana
+                wallet.
               </p>
 
-              <div className="mt-10 flex flex-wrap gap-3 items-center">
-                <Link href="#markets" className="btn-ps-primary">
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link
+                  href="#markets"
+                  className="inline-flex items-center rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-[color:var(--ps-black)] transition hover:bg-[color:var(--ps-cyan)] hover:text-white hover:scale-[1.03]"
+                >
                   Browse markets
                 </Link>
                 <Link
                   href="#how-it-works"
-                  className="btn-ps-ghost border-white/30 !text-white/90 hover:!text-white"
+                  className="inline-flex items-center rounded-full border border-white/30 bg-transparent px-6 py-3 text-[15px] font-medium text-white/90 transition hover:border-white hover:text-white"
                 >
                   How it works
                 </Link>
-                <div className="hidden sm:block">
-                  <UsdcBalance />
-                </div>
               </div>
             </div>
 
-            {/* Right column — product preview */}
-            <div className="flex justify-center lg:justify-end">
+            {/* Right column — atmospheric signature */}
+            <div className="relative hidden min-h-[520px] lg:block">
+              <HeroNebula />
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom-anchor row: tagline left, inline metrics right */}
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-wrap items-end justify-between gap-6 px-12 pb-12">
+          <p className="max-w-[260px] text-[13px] font-light leading-[1.45] text-white/55">
+            Predict any event · trade in a second · never trust a custodian.
+          </p>
+          <div className="flex flex-wrap items-end gap-10">
+            <Metric value="99%" label="Settled on-chain" />
+            <Metric value="1s" label="Trade clears" />
+            <Metric value="$0.0001" label="Avg Solana fee" />
+          </div>
+        </div>
+
+        {/* Mobile nebula (below copy) */}
+        <div className="relative z-10 h-[280px] w-full lg:hidden">
+          <HeroNebula />
+        </div>
+      </section>
+
+      {/* ============ BUILT WITH strip ============ */}
+      <div className="surface-ps-dark border-t border-white/10">
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-10 gap-y-4 px-12 py-5">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40">
+            Built with
+          </span>
+          <TechMark label="Solana" />
+          <TechMark label="Anchor" />
+          <TechMark label="Next.js" />
+          <TechMark label="DeepSeek" />
+          <TechMark label="Phantom" />
+          <TechMark label="Helius" />
+        </div>
+      </div>
+
+      {/* ============ 01 · LIVE MARKETS ============ */}
+      <section id="markets" className="surface-ps-light">
+        <div className="mx-auto w-full max-w-[1200px] px-12 py-20">
+          <div className="eyebrow">
+            <span className="eyebrow-num">01</span>
+            <span className="eyebrow-kicker">Live markets</span>
+          </div>
+          <h2 className="display-h2">Trade the long tail of prediction.</h2>
+          <p className="mt-3 max-w-xl text-[color:var(--ps-body-gray)] font-light leading-[1.55]">
+            Markets Polymarket won't list — sports, politics, crypto,
+            culture. Open your own or pick one already running.
+          </p>
+
+          {/* Featured pin */}
+          <div className="mt-12 grid gap-10 rounded-[16px] border border-[color:var(--ps-divider)] bg-white p-8 lg:grid-cols-[1fr_minmax(0,360px)] lg:items-center">
+            <div>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--ps-blue)]">
+                Market of the week
+              </span>
+              <h3 className="mt-3 text-[28px] font-semibold leading-[1.15] tracking-[-0.01em] text-[color:var(--ps-display-ink)]">
+                Argentina × World Cup 2026 final
+              </h3>
+              <p className="mt-3 text-[15px] font-light leading-[1.55] text-[color:var(--ps-body-gray)]">
+                Our most-watched market this week. YES pays 1 USDC per token
+                if Argentina lifts the trophy on July 19, 2026.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="#markets-grid"
+                  className="inline-flex items-center rounded-full bg-[color:var(--ps-blue)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[color:var(--ps-cyan)] hover:scale-[1.03]"
+                >
+                  See the book
+                </Link>
+                <span className="text-xs text-[color:var(--ps-body-gray)] self-center">
+                  Closes in 3 months · $2.4M volume
+                </span>
+              </div>
+            </div>
+            <div className="lg:justify-self-end">
               <FeaturedMarketCard />
             </div>
           </div>
 
-          <StatsStrip />
-        </div>
-      </section>
-
-      {/* Category filters + Live markets */}
-      <section id="markets" className="surface-ps-light">
-        <div className="mx-auto w-full max-w-5xl px-6 py-16">
-          <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="text-[28px] font-light leading-[1.25] tracking-[0.1px] text-[color:var(--ps-display-ink)]">
-              Live markets
-            </h2>
-            <span className="text-xs text-[color:var(--ps-body-gray)]">
-              devnet · free test USDC
-            </span>
-          </div>
-          <div className="mb-6">
+          <div className="mt-14 mb-6">
             <CategoryPills />
           </div>
-          <MarketList />
+
+          <div id="markets-grid">
+            <MarketList />
+          </div>
         </div>
       </section>
 
-      {/* Feature strip — why Arena */}
+      {/* ============ 02 · WHY ARENA ============ */}
       <section className="surface-ps-light border-t border-[color:var(--ps-divider)]">
-        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
-          <h2 className="text-[28px] font-light leading-[1.25] tracking-[0.1px] text-[color:var(--ps-display-ink)]">
-            Why Arena
-          </h2>
-          <p className="mt-2 max-w-xl text-[color:var(--ps-body-gray)] font-light">
-            A prediction market designed for traders who want speed, fairness,
-            and self-custody — not a middleman.
+        <div className="mx-auto w-full max-w-[1200px] px-12 py-20">
+          <div className="eyebrow">
+            <span className="eyebrow-num">02</span>
+            <span className="eyebrow-kicker">Why Arena</span>
+          </div>
+          <h2 className="display-h2">Built for traders, not middlemen.</h2>
+          <p className="mt-3 max-w-xl text-[color:var(--ps-body-gray)] font-light leading-[1.55]">
+            Every design choice is in your favor — self-custody, instant
+            clears, transparent resolution, near-zero fees.
           </p>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <FeatureCard
               icon={Target}
               title="Bet on anything"
@@ -127,39 +195,29 @@ export default function Home() {
             <FeatureCard
               icon={Coins}
               title="Near-zero fees"
-              desc="Solana makes it practical to trade sub-dollar positions."
+              desc="Solana makes sub-dollar positions practical — unlike every EVM market."
             />
-          </div>
-
-          {/* Social proof */}
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-[color:var(--ps-divider)] pt-8 text-xs font-medium uppercase tracking-wider text-[color:var(--ps-body-gray)]">
-            <span>Submitted to Colosseum Frontier 2026</span>
-            <span className="h-1 w-1 rounded-full bg-[color:var(--ps-mute)]" />
-            <span>Built on Solana</span>
-            <span className="h-1 w-1 rounded-full bg-[color:var(--ps-mute)]" />
-            <span>AI Copilot powered by DeepSeek</span>
-            <span className="h-1 w-1 rounded-full bg-[color:var(--ps-mute)]" />
-            <span>Open source · MIT</span>
           </div>
         </div>
       </section>
 
-      {/* How it works — PS light content panel */}
+      {/* ============ 03 · HOW IT WORKS ============ */}
       <section
         id="how-it-works"
         className="surface-ps-light border-t border-[color:var(--ps-divider)]"
       >
-        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
-          <h2 className="text-[28px] font-light leading-[1.25] tracking-[0.1px] text-[color:var(--ps-display-ink)]">
-            Three steps to your first bet
-          </h2>
-          <p className="mt-2 max-w-xl text-[color:var(--ps-body-gray)] font-light">
-            No sign-up form. No KYC. Just a Solana wallet and test USDC from
-            the faucet.
+        <div className="mx-auto w-full max-w-[1200px] px-12 py-20">
+          <div className="eyebrow">
+            <span className="eyebrow-num">03</span>
+            <span className="eyebrow-kicker">How it works</span>
+          </div>
+          <h2 className="display-h2">Three steps to your first bet.</h2>
+          <p className="mt-3 max-w-xl text-[color:var(--ps-body-gray)] font-light leading-[1.55]">
+            No sign-up, no KYC, no email. Just a Solana wallet and free test
+            USDC from the faucet.
           </p>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-3 relative">
-            {/* dashed connector between steps (desktop only) */}
+          <div className="relative mt-12 grid gap-6 sm:grid-cols-3">
             <div
               aria-hidden
               className="pointer-events-none absolute top-10 left-[16.66%] right-[16.66%] hidden border-t-2 border-dashed border-[color:var(--ps-mute)] sm:block"
@@ -186,35 +244,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Earn teaser */}
+      {/* ============ 04 · EARN ============ */}
       <section className="surface-ps-light border-t border-[color:var(--ps-divider)]">
-        <div className="mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
-          <div className="grid gap-8 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div className="mx-auto w-full max-w-[1200px] px-12 py-20">
+          <div className="eyebrow">
+            <span className="eyebrow-num">04</span>
+            <span className="eyebrow-kicker">Earn</span>
+          </div>
+          <div className="mt-4 grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
-              <span className="inline-block rounded-[3px] bg-[color:var(--ps-blue)]/10 px-2 py-0.5 text-[11px] font-medium text-[color:var(--ps-blue)]">
-                For liquidity providers
-              </span>
-              <h2 className="mt-3 text-[28px] font-light leading-[1.25] tracking-[0.1px] text-[color:var(--ps-display-ink)]">
-                Earn fees from every trade.
-              </h2>
-              <p className="mt-2 max-w-xl text-[color:var(--ps-body-gray)] font-light">
+              <h2 className="display-h2">Earn fees from every trade.</h2>
+              <p className="mt-3 max-w-xl text-[color:var(--ps-body-gray)] font-light leading-[1.55]">
                 Deposit USDC into a market vault, earn 30 bps on every trade
                 that clears through it. Withdraw any time.
               </p>
             </div>
             <Link
               href="/earn"
-              className="btn-ps-primary justify-self-start sm:justify-self-end"
+              className="inline-flex items-center gap-1 rounded-full bg-[color:var(--ps-blue)] px-6 py-3 text-[15px] font-semibold text-white transition hover:bg-[color:var(--ps-cyan)] hover:scale-[1.03]"
             >
               Earn passive yield
+              <ArrowUpRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer — PS brand anchor */}
+      {/* ============ FOOTER ============ */}
       <footer className="surface-ps-brand">
-        <div className="mx-auto w-full max-w-5xl px-6 py-14">
+        <div className="mx-auto w-full max-w-[1200px] px-12 py-16">
           <div className="grid gap-10 sm:grid-cols-[1.5fr_1fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2">
@@ -226,61 +284,28 @@ export default function Home() {
               </p>
             </div>
 
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">
-                Product
-              </div>
-              <ul className="space-y-2 font-light text-white/80 text-sm">
-                <li>
-                  <Link href="#markets" className="hover:text-white transition">
-                    Browse markets
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#how-it-works" className="hover:text-white transition">
-                    How it works
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/earn" className="hover:text-white transition">
-                    Earn
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/create" className="hover:text-white transition">
-                    Open a market
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            <FooterCol
+              title="Product"
+              items={[
+                { label: "Browse markets", href: "#markets" },
+                { label: "How it works", href: "#how-it-works" },
+                { label: "Earn", href: "/earn" },
+                { label: "Open a market", href: "/create" },
+              ]}
+            />
 
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">
-                Help
-              </div>
-              <ul className="space-y-2 font-light text-white/80 text-sm">
-                <li>
-                  <Link href="/faq" className="hover:text-white transition">
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition">
-                    Terms
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://spl-token-faucet.com/?token-name=USDC-Dev"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-white transition"
-                  >
-                    Get test USDC
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <FooterCol
+              title="Help"
+              items={[
+                { label: "FAQ", href: "/faq" },
+                { label: "Terms", href: "/terms" },
+                {
+                  label: "Get test USDC",
+                  href: "https://spl-token-faucet.com/?token-name=USDC-Dev",
+                  external: true,
+                },
+              ]}
+            />
 
             <div>
               <div className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">
@@ -341,6 +366,27 @@ export default function Home() {
   );
 }
 
+function Metric({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <div className="text-[32px] font-semibold leading-none tracking-tight text-white tabular-nums">
+        {value}
+      </div>
+      <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/50">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function TechMark({ label }: { label: string }) {
+  return (
+    <span className="text-[13px] font-light tracking-[0.08em] text-white/70 transition hover:text-white">
+      {label}
+    </span>
+  );
+}
+
 function FeatureCard({
   icon: Icon,
   title,
@@ -351,14 +397,14 @@ function FeatureCard({
   desc: string;
 }) {
   return (
-    <div className="group rounded-[12px] bg-white p-6 shadow-ps-1 transition hover:shadow-ps-3 hover:-translate-y-0.5">
+    <div className="group rounded-[12px] border border-[color:var(--ps-divider)] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[color:var(--ps-blue)]">
       <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-[color:var(--ps-blue)]/10 text-[color:var(--ps-blue)] transition group-hover:bg-[color:var(--ps-blue)] group-hover:text-white">
         <Icon size={18} strokeWidth={2} />
       </div>
-      <h3 className="mt-4 text-lg font-medium leading-snug text-[color:var(--ps-charcoal)]">
+      <h3 className="mt-4 text-lg font-semibold leading-snug text-[color:var(--ps-charcoal)]">
         {title}
       </h3>
-      <p className="mt-1.5 text-sm text-[color:var(--ps-body-gray)] leading-[1.5]">
+      <p className="mt-1.5 text-sm text-[color:var(--ps-body-gray)] leading-[1.55] font-light">
         {desc}
       </p>
     </div>
@@ -377,21 +423,62 @@ function Step({
   desc: string;
 }) {
   return (
-    <div className="relative rounded-[12px] bg-white p-6 shadow-ps-1">
+    <div className="relative rounded-[12px] border border-[color:var(--ps-divider)] bg-white p-6">
       <div className="flex items-center gap-3">
-        <span className="text-[54px] font-light leading-none tracking-tight text-[color:var(--ps-blue)]/15">
+        <span className="text-[54px] font-semibold leading-none tracking-tight text-[color:var(--ps-blue)]/15">
           {n}
         </span>
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--ps-blue)] text-white">
           <Icon size={18} strokeWidth={2} />
         </span>
       </div>
-      <h3 className="mt-4 text-xl font-light leading-[1.25] text-[color:var(--ps-display-ink)]">
+      <h3 className="mt-4 text-xl font-semibold leading-[1.2] tracking-tight text-[color:var(--ps-display-ink)]">
         {title}
       </h3>
-      <p className="mt-2 text-sm text-[color:var(--ps-body-gray)] leading-[1.5]">
+      <p className="mt-2 text-sm text-[color:var(--ps-body-gray)] leading-[1.55] font-light">
         {desc}
       </p>
+    </div>
+  );
+}
+
+function FooterCol({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; href: string; external?: boolean }[];
+}) {
+  return (
+    <div>
+      <div className="text-xs font-semibold uppercase tracking-wider text-white/50 mb-3">
+        {title}
+      </div>
+      <ul className="space-y-2 font-light text-white/80 text-sm">
+        {items.map((item) =>
+          item.external ? (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition"
+              >
+                {item.label}
+              </a>
+            </li>
+          ) : (
+            <li key={item.label}>
+              <Link
+                href={item.href}
+                className="hover:text-white transition"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ),
+        )}
+      </ul>
     </div>
   );
 }

@@ -48,7 +48,7 @@ export function MarketCard({ row }: { row: MarketAccount }) {
   return (
     <Link
       href={`/markets/${pubkey.toBase58()}`}
-      className="group relative block rounded-[12px] border border-transparent bg-white p-5 shadow-ps-2 transition hover:-translate-y-0.5 hover:shadow-ps-3 hover:border-[color:var(--ps-blue)]"
+      className="group relative block rounded-[12px] border border-[color:var(--ps-divider)] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[color:var(--ps-blue)] hover:shadow-ps-1"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

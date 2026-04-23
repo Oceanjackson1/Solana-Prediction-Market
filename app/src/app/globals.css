@@ -199,3 +199,73 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Slow breathing animation for nebula ring */
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.04);
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* Editorial section header (numbered label above h2) */
+.eyebrow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ps-divider);
+}
+.eyebrow-num {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ps-body-gray);
+}
+.eyebrow-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ps-body-gray);
+}
+.eyebrow-dark,
+.eyebrow-dark .eyebrow-num,
+.eyebrow-dark .eyebrow-kicker {
+  color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Display heading defaults (heavier than M2 font-light baseline) */
+.display-h2 {
+  margin-top: 14px;
+  font-size: 40px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--ps-display-ink);
+}
+.display-h2-dark {
+  color: var(--ps-paper);
+}
+
+/* Corner crop marks (L-shaped brackets) */
+.crop-mark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(255, 255, 255, 0.28);
+  pointer-events: none;
+}
+.crop-tl { top: 28px; left: 28px; border-top: 1px solid; border-left: 1px solid; }
+.crop-tr { top: 28px; right: 28px; border-top: 1px solid; border-right: 1px solid; }
+.crop-bl { bottom: 28px; left: 28px; border-bottom: 1px solid; border-left: 1px solid; }
+.crop-br { bottom: 28px; right: 28px; border-bottom: 1px solid; border-right: 1px solid; }
