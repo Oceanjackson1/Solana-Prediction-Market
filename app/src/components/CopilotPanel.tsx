@@ -39,7 +39,7 @@ export function CopilotPanel({
         <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
         <span className="text-sm font-medium">AI Copilot</span>
         <span className="text-xs text-zinc-500">
-          claude-opus-4-7 · adaptive thinking
+          deepseek-chat · structured JSON
         </span>
       </div>
 

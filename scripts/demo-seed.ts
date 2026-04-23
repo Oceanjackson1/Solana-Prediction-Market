@@ -102,12 +102,13 @@ async function main() {
     .rpc();
   saveMarketCache(market, slug);
 
-  // Mint complete set: creator needs YES + NO to seed vault.
+  // Mint complete set: creator needs YES + NO to seed vault AND to have some
+  // left over for seeding the order book after provide_liquidity drains 1000.
   const creatorYes = getAssociatedTokenAddressSync(p.yesMint, payer.publicKey);
   const creatorNo = getAssociatedTokenAddressSync(p.noMint, payer.publicKey);
-  console.log("▸ minting complete set of 1000 YES + 1000 NO for vault seed");
+  console.log("▸ minting complete set of 1100 YES + 1100 NO (1000 for vault, 100 for order book)");
   await programs.market.methods
-    .mintCompleteSet(new BN(1000 * UNIT))
+    .mintCompleteSet(new BN(1100 * UNIT))
     .accounts({
       user: payer.publicKey,
       market,

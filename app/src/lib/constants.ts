@@ -9,8 +9,11 @@ export const CLUSTER: "devnet" | "mainnet-beta" | "testnet" =
     | "mainnet-beta"
     | "testnet") ?? "devnet";
 
+// Collateral mint. Defaults to Circle devnet USDC. For local demo or when the
+// project's mock USDC is in use, override via NEXT_PUBLIC_USDC_MINT in env.
 export const USDC_MINT_DEVNET = address(
-  "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
+  process.env.NEXT_PUBLIC_USDC_MINT ??
+    "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU",
 );
 export const USDC_DECIMALS = 6;
 
