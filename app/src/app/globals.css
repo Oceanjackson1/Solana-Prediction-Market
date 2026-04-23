@@ -191,18 +191,11 @@ body {
   box-shadow: 0 0 0 2px var(--ps-blue);
 }
 
-/* ========== Wallet adapter modal polish ========== */
-.wallet-adapter-button {
-  border-radius: 999px !important;
-  font-size: 14.4px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.144px !important;
-  background: var(--ps-blue) !important;
-  transition: transform 180ms ease, background-color 180ms ease,
-    box-shadow 180ms ease !important;
+/* ========== Utilities ========== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-.wallet-adapter-button:hover {
-  background: var(--ps-cyan) !important;
-  box-shadow: 0 0 0 2px var(--ps-blue) !important;
-  transform: scale(1.04) !important;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

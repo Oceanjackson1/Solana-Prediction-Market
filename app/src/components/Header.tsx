@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
+import { Plus } from "lucide-react";
 
-const WalletMultiButton = dynamic(
-  () =>
-    import("@solana/wallet-adapter-react-ui").then((m) => m.WalletMultiButton),
+const ConnectButton = dynamic(
+  () => import("./ConnectButton").then((m) => m.ConnectButton),
   { ssr: false },
 );
 
@@ -54,11 +54,12 @@ export function Header() {
         <div className="ml-auto flex items-center gap-3">
           <Link
             href="/create"
-            className="hidden sm:inline-flex text-sm text-white/60 hover:text-white transition"
+            className="hidden sm:inline-flex items-center gap-1 text-sm text-white/60 hover:text-white transition"
           >
-            + Open market
+            <Plus size={14} strokeWidth={2.5} />
+            Open market
           </Link>
-          <WalletMultiButton />
+          <ConnectButton />
         </div>
       </div>
     </header>
