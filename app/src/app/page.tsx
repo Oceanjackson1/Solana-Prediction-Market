@@ -1,7 +1,8 @@
 import { MarketList } from "@/components/MarketList";
 import { FeaturedMarketCard } from "@/components/FeaturedMarketCard";
 import { CategoryPills } from "@/components/CategoryPills";
-import { HeroNebula } from "@/components/HeroNebula";
+import { HeroBackground } from "@/components/HeroBackground";
+import { TickerStrip } from "@/components/TickerStrip";
 import Link from "next/link";
 import {
   Target,
@@ -22,33 +23,39 @@ export default function Home() {
   return (
     <main className="flex flex-1 w-full flex-col">
       {/* ============ HERO ============ */}
-      <section className="relative overflow-hidden surface-ps-dark min-h-[88vh] flex flex-col">
+      <section className="relative overflow-hidden bg-black min-h-[92vh] flex flex-col text-white">
+        {/* Ambient animated background — aurora blobs + grid + grain */}
+        <HeroBackground />
+
         {/* Corner crop marks — editorial "print proof" feel */}
         <span className="crop-mark crop-tl" aria-hidden />
         <span className="crop-mark crop-tr" aria-hidden />
         <span className="crop-mark crop-bl" aria-hidden />
         <span className="crop-mark crop-br" aria-hidden />
 
-        {/* Top-left wordmark caption (masthead attribution) */}
-        <div className="absolute top-8 left-20 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/40">
+        {/* Top-left wordmark caption */}
+        <div className="absolute top-8 left-12 z-20 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/40">
           A R E N A <span className="mx-3 text-white/25">/</span> v 0.1
         </div>
 
         {/* Main grid */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 items-center px-12 pt-28 pb-32">
-          <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-center">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 items-center px-12 pt-28 pb-24">
+          <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,640px)_minmax(0,460px)] lg:items-center">
             {/* Left column — editorial copy */}
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-3 py-1 text-[11px] font-medium tracking-wide text-white/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--ps-cyan)] animate-pulse" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-3 py-1 text-[11px] font-medium tracking-wide text-white/85">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[color:var(--ps-cyan)] opacity-70 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--ps-cyan)]" />
+                </span>
                 Live on Solana devnet · Free test USDC
               </span>
-              <h1 className="mt-7 text-[56px] font-semibold leading-[1.04] tracking-[-0.02em] text-white sm:text-[68px]">
+              <h1 className="mt-7 font-semibold leading-[1.02] tracking-[-0.025em] text-white text-[clamp(42px,5.4vw,64px)]">
                 Bet on anything.
                 <br />
-                <span className="text-[color:var(--ps-cyan)]">Settled on Solana.</span>
+                <span className="title-shimmer">Settled on Solana.</span>
               </h1>
-              <p className="mt-6 max-w-[48ch] text-[17px] font-light leading-[1.55] text-white/70">
+              <p className="mt-6 max-w-[52ch] text-[17px] font-light leading-[1.55] text-white/70">
                 A prediction market for the long tail of events — from World
                 Cup finals to AI milestones. One click, one second, one Solana
                 wallet.
@@ -57,28 +64,32 @@ export default function Home() {
               <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Link
                   href="#markets"
-                  className="inline-flex items-center rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-[color:var(--ps-black)] transition hover:bg-[color:var(--ps-cyan)] hover:text-white hover:scale-[1.03]"
+                  className="inline-flex items-center rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-[color:var(--ps-black)] transition hover:bg-[color:var(--ps-cyan)] hover:text-white hover:scale-[1.03] shadow-[0_0_40px_-10px_rgba(30,174,219,0.8)]"
                 >
                   Browse markets
                 </Link>
                 <Link
                   href="#how-it-works"
-                  className="inline-flex items-center rounded-full border border-white/30 bg-transparent px-6 py-3 text-[15px] font-medium text-white/90 transition hover:border-white hover:text-white"
+                  className="inline-flex items-center rounded-full border border-white/30 bg-white/5 backdrop-blur px-6 py-3 text-[15px] font-medium text-white/90 transition hover:border-white hover:bg-white/10 hover:text-white"
                 >
                   How it works
                 </Link>
               </div>
             </div>
 
-            {/* Right column — atmospheric signature */}
-            <div className="relative hidden min-h-[520px] lg:block">
-              <HeroNebula />
+            {/* Right column — floating featured market card */}
+            <div className="relative hidden lg:flex justify-end">
+              {/* glow bloom behind card */}
+              <div className="pointer-events-none absolute inset-0 -m-8 rounded-[32px] bg-[radial-gradient(ellipse_at_center,rgba(30,174,219,0.35),transparent_70%)] blur-2xl" />
+              <div className="relative animate-float-card">
+                <FeaturedMarketCard />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom-anchor row: tagline left, inline metrics right */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-wrap items-end justify-between gap-6 px-12 pb-12">
+        {/* Bottom-anchor row: tagline + inline metrics */}
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-wrap items-end justify-between gap-6 px-12 pb-10">
           <p className="max-w-[260px] text-[13px] font-light leading-[1.45] text-white/55">
             Predict any event · trade in a second · never trust a custodian.
           </p>
@@ -89,14 +100,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile nebula (below copy) */}
-        <div className="relative z-10 h-[280px] w-full lg:hidden">
-          <HeroNebula />
+        {/* Mobile floating card */}
+        <div className="relative z-10 px-12 pb-10 lg:hidden">
+          <FeaturedMarketCard />
+        </div>
+
+        {/* Ticker at bottom of hero — live terminal pulse */}
+        <div className="relative z-10">
+          <TickerStrip />
         </div>
       </section>
 
       {/* ============ BUILT WITH strip ============ */}
-      <div className="surface-ps-dark border-t border-white/10">
+      <div className="bg-black border-t border-white/10">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-10 gap-y-4 px-12 py-5">
           <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/40">
             Built with

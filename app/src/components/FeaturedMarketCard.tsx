@@ -35,7 +35,7 @@ export function FeaturedMarketCard() {
           </div>
           <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-rose-100">
             <div
-              className="h-full rounded-full bg-emerald-500"
+              className="bar-shine h-full rounded-full bg-emerald-500"
               style={{ width: `${yes}%` }}
             />
           </div>
