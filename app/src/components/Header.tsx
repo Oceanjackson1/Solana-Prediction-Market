@@ -12,7 +12,8 @@ const WalletMultiButton = dynamic(
 
 const NAV = [
   { href: "/", label: "Markets" },
-  { href: "/create", label: "Open market" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/earn", label: "Earn" },
 ];
 
 export function Header() {
@@ -31,10 +32,9 @@ export function Header() {
 
         <nav className="hidden sm:flex items-center gap-1 text-sm">
           {NAV.map((n) => {
+            const target = n.href.split("#")[0] || "/";
             const active =
-              n.href === "/"
-                ? pathname === "/"
-                : pathname?.startsWith(n.href);
+              target === "/" ? pathname === "/" : pathname?.startsWith(target);
             return (
               <Link
                 key={n.href}
@@ -51,7 +51,13 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-3">
+          <Link
+            href="/create"
+            className="hidden sm:inline-flex text-sm text-white/60 hover:text-white transition"
+          >
+            + Open market
+          </Link>
           <WalletMultiButton />
         </div>
       </div>

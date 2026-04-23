@@ -45,14 +45,20 @@ export function MarketList() {
     return (
       <div className="rounded-[12px] border border-dashed border-[color:var(--ps-mute)] bg-white p-10 text-center">
         <p className="text-xl font-light text-[color:var(--ps-charcoal)] leading-[1.25]">
-          No markets open yet.
+          Markets coming online soon.
         </p>
-        <p className="mt-2 text-sm text-[color:var(--ps-body-gray)]">
-          Be the first — open a market and the vault will backstop it.
+        <p className="mt-2 mx-auto max-w-md text-sm text-[color:var(--ps-body-gray)] leading-[1.5]">
+          This is a fresh devnet deployment — the first markets will appear
+          here once seeded. Want to try opening one yourself?
         </p>
-        <Link href="/create" className="btn-ps-primary mt-6">
-          Open a market
-        </Link>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link href="/create" className="btn-ps-primary">
+            Open a market
+          </Link>
+          <Link href="/#how-it-works" className="btn-ps-ghost">
+            Read how it works
+          </Link>
+        </div>
       </div>
     );
   }
